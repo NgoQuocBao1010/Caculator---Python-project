@@ -2,8 +2,8 @@ def hello():
 	print('Hello')
 
 
-def f(func):
-	func()
+def f(x):
+	print(202 / 32)
 
 
-f(hello)
+f(8)
