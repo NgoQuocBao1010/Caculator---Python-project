@@ -1,1 +1,9 @@
-x = 2/0
+def hello():
+	print('Hello')
+
+
+def f(func):
+	func()
+
+
+f(hello)
