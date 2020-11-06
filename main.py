@@ -3,6 +3,7 @@ import tkinter as tk
 # FONTS
 buttonFonts = ("Gothic", 15, 'bold')
 funcButtonSize = (0.15, 0.1)
+symbols = ('-', '+', ':', 'x', 'R', '^', '(', ')')
 
 
 # BUTTON FUNCTIONS
