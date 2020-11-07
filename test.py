@@ -5,5 +5,6 @@ def hello():
 def f(x):
 	print(202 / 32)
 
+s = '567'
 
-f(8)
+print(5 in s)

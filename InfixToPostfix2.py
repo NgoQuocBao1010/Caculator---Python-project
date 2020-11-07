@@ -105,7 +105,6 @@ def renew_list(lst):
 			continue
 		elif str(lst[index]) not in plus_minus:
 			infix.append(lst[index])
-
 	return infix
 
 
@@ -178,6 +177,7 @@ def calculate(string):
 
 	string = convert_to_list(string)
 	postfix = transform_to_postfix(renew_list(string))
+	print(postfix)
 	for element in postfix:
 		if str(element) not in operand:
 			stack.append(element)
@@ -185,6 +185,7 @@ def calculate(string):
 			try:
 				x1 = stack.pop()
 				x2 = stack.pop()
+				print(x1, x2)
 				result = do_operator(x2, element, x1)
 				stack.append(result)
 			except IndexError:
@@ -192,10 +193,10 @@ def calculate(string):
 
 	return stack[0]
 
-#print(renew_string('6-----(5+-----3)x2'))
+# print(renew_string('6-----(5+-----3)x2'))
 '''
 lst =  renew_list(convert_to_list('3-(2-7)'))
 for element in lst:
 	print(element, end=' ')'''
 
-#print(calculate('3-(2-7)'))
+print(calculate('3-(12-7)'))
