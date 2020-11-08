@@ -4,6 +4,37 @@ operators = ['+', '-', 'x', ':', ':R', '^']
 parenthesis = '()[]'
 
 
+#  ========================== Expression Manipulation ==========================
+# ##############################################################################
+
+
+# Check for syntax in expression
+def checkForValidSyntax(expression):
+	if expression[0] in ['x', ':', '^']:
+		return False
+
+	if expression[len(expression) - 1] in operators:
+		False
+
+	# Check parethesis syntax
+	stack = []
+
+	for char in expression:
+		if char in ['(', '[']:
+			stack.append(char)
+
+		if char in [')', ']']:
+			if len(stack) == 0:
+				return False
+			else:
+				stack.pop()
+
+	if len(stack) != 0:
+		return False
+
+	return True
+
+
 # Eliminate unecessary elements in expression string
 def minimizeInput(expression):
 	expression = expression.strip()
@@ -118,6 +149,9 @@ def calculate(operand1, operator, operand2):
 
 # Calculate the result base on postfix
 def calculateExpr(expr):
+	if not checkForValidSyntax(expr):
+		return "Invalid Syntax"
+
 	expr = minimizeInput(expr)
 	postfix = infixToPostfix(seperateExpr(expr))
 
@@ -136,7 +170,7 @@ def calculateExpr(expr):
 
 
 
-
+# print(checkForValidSyntax('6-----(5+-------+--3)x2'))
 # print(minimizeInput('6-----(5+-------+--3)x2'))
 # print(seperateExpr('6-(5-3)x2'))
 # print(operatorPriority('x'))

@@ -1,32 +1,51 @@
 import tkinter as tk
 from calculateAlgorithm import calculateExpr
 
-# FONTS
+# GLOBAL VARIABLES
 buttonFonts = ("Gothic", 15, 'bold')
 funcButtonSize = (0.15, 0.1)
 symbols = ('-', '+', ':', 'x', 'R', '^', '(', ')')
 
+recentAns = 0 # variable contains last answer
+recentExpr = '' # variable contains last answer
+
 
 # BUTTON FUNCTIONS
 def summit():
+	global recentAns, recentExpr
 	expr = inputPlace.get()
+
+	if len(expr) <= 0:
+		return
+
 	result = calculateExpr(expr)
 	inputPlace.delete(0, tk.END)
 	inputPlace.insert(tk.END, result)
 	inputPlace['justify'] = 'right'
 
+	recentAns = result
+	recentExpr = expr
 
-def get_recent_answer():
-	print('Recent answer')
+
+def getRecentAns():
+	global recentAns
+	if inputPlace['justify'] == 'right':
+			inputPlace['justify'] = 'left'
+			inputPlace.delete(0, tk.END)
+	inputPlace.insert(tk.END, str(recentAns))
 
 
-def clear_main():
+def clearEntry():
 	inputPlace['justify'] = 'left'
 	inputPlace.delete(0, tk.END)
 
 
-def last_algorithm():
-	print('last al')
+def lastExpr():
+	global recentExpr
+	if inputPlace['justify'] == 'right':
+			inputPlace['justify'] = 'left'
+			inputPlace.delete(0, tk.END)
+	inputPlace.insert(tk.END, str(recentExpr))
 
 
 # buttons preresent number
@@ -94,15 +113,15 @@ inputPlace.place(relx=0.05, rely=0.05, relwidth=0.9, relheight=0.1)
 
 equalBt = funcButton(canvas, '=', summit, (0.8, 0.2))
 
-answerBt = funcButton(canvas, 'Ans', get_recent_answer, (0.65, 0.2))
+answerBt = funcButton(canvas, 'Ans', getRecentAns, (0.65, 0.2))
 
 deleteBt = funcButton(canvas, 'Del', lambda: inputPlace.delete(len(inputPlace.get()) - 1), (0.65, 0.3))
 
-clearBt = funcButton(canvas, 'C', clear_main, (0.8, 0.3))
+clearBt = funcButton(canvas, 'C', clearEntry, (0.8, 0.3))
 
 resetBt = funcButton(canvas, 'Reset', summit, (0.8, 0.4))
 
-lastAlBt = funcButton(canvas, 'L.A', last_algorithm, (0.65, 0.4))
+lastAlBt = funcButton(canvas, 'L.E', lastExpr, (0.65, 0.4))
 
 
 
